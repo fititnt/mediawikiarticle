@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content">
+	<name>Content - MediawikiArticle</name>
+	<author>Joomla! Project</author>
+	<creationDate>July 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>2.5.0</version>
+	<description>PLG_CONTENT_MEDIAWIKIARTICLE_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="mediawikiarticle">mediawikiarticle.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+                <field name="mediawiki_username"
+                       type="textfield">
+                </field>
+                <field name="mediawiki_password"
+                       type="password">
+                </field>
+                <field name="mediawiki_siteurl"
+                       type="textfield">
+                </field>
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>
