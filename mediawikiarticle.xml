@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="content">
-	<name>Content - MediawikiArticle</name>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>plg_content_mediawikiarticle</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2012</creationDate>
 	<copyright>Copyright (C) 2005 - 2012 Open Source Matters. All rights reserved.</copyright>
@@ -13,20 +13,37 @@
 	<files>
 		<filename plugin="mediawikiarticle">mediawikiarticle.php</filename>
 		<filename>index.html</filename>
+        <!-- For development, also folder folder -->
+		<folder>language</folder>
 	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_content_mediawikiarticle.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_content_mediawikiarticle.sys.ini</language>
+	</languages>
 
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-                <field name="mediawiki_username"
-                       type="textfield">
-                </field>
-                <field name="mediawiki_password"
-                       type="password">
-                </field>
-                <field name="mediawiki_siteurl"
-                       type="textfield">
-                </field>
+				<field name="mediawiki_username"
+					   type="textfield"
+					   default=""
+					   label="PLG_CONTENT_MEDIAWIKIARTICLE_USERNAME_LABEL"
+					   description="PLG_CONTENT_MEDIAWIKIARTICLE_USERNAME_DESC"
+					   />
+				<field name="mediawiki_password"
+					   type="password"
+					   default=""
+					   label="PLG_CONTENT_MEDIAWIKIARTICLE_PASSWORD_LABEL"
+					   description="PLG_CONTENT_MEDIAWIKIARTICLE_PASSWORD_DESC"
+					   />
+				<field name="mediawiki_siteurl"
+					   type="textfield"
+					   default="http://docs.joomla.org"
+					   requered="true"
+					   label="PLG_CONTENT_MEDIAWIKIARTICLE_SITEURL_LABEL"
+					   description="PLG_CONTENT_MEDIAWIKIARTICLE_SITEURL_DESC"
+					   />
 			</fieldset>
 		</fields>
 	</config>
