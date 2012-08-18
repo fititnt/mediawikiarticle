@@ -1,59 +1,85 @@
 <?php
-/**
- * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
- */
 
+/**
+ * @package    Content.mediawikiarticle
+ * 
+ * @copyright  Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
 defined('_JEXEC') or die;
-jimport('joomla.plugin.plugin');
 
 /**
- * Example Content Plugin
+ * Mediawikiarticle Content Plugin
  *
- * @package		Joomla.Plugin
- * @subpackage	Content.mediawikiarticle
- * @since		2.5
+ * @package     Joomla.Plugin
+ * @subpackage  Content.mediawikiarticle
+ * @since       2.5
  */
-class plgContentMediawikiarticle extends JPlugin
-{
+class plgContentMediawikiarticle extends JPlugin {
 
-	private $mediawiki;
+	/**
+	 *
+	 * @var  JMediawiki 
+	 */
+	private $_mediawiki;
 
-	public function __construct(& $subject, $config)
+	/**
+	 * Constructor
+	 *
+	 * @param   object  &$subject  The object to observe
+	 * @param   array   $config    An optional associative array of configuration settings.
+	 *                             Recognized key values include 'name', 'group', 'params', 'language'
+	 *                             (this list is not meant to be comprehensive).
+	 *
+	 * @since   11.1
+	 */
+	public function __construct(&$subject, $config)
 	{
 		parent::__construct($subject, $config);
 
-		$options = new JRegistry();
-		$options->set('api.username', $this->params->get('mediawiki_username'));
-		$options->set('api.password', $this->params->get('mediawiki_password'));
-		$options->set('api.url', $this->params->get('mediawiki_siteurl'));
+		$options = new JRegistry;
+		$options->set('api.username', $this->params->get('username'));
+		$options->set('api.password', $this->params->get('password'));
+		$options->set('api.url', $this->params->get('siteurl'));
 
-		$this->mediawiki = new JMediawiki($options);
+		$this->_mediawiki = new JMediawiki($options);
 	}
 
+	/**
+	 * Prepare the content
+	 *
+	 * @param   string  $context  The context of the content being passed to the plugin.
+	 * @param   object  &$row     The article object.  Note $article->text is also available
+	 * @param   object  &$params  The article params
+	 * @param   int     $page     The 'page' number
+	 * 
+	 * @return  void
+	 */
 	public function onContentPrepare($context, &$row, &$params, $page = 0)
 	{
 
-		// only articles context
-		if( $context != 'com_content.article' )
+		// Only articles context
+		if ($context != 'com_content.article')
 		{
 			return;
 		}
 
-		// only pull article categorized with wikibot
-		if( $row->category_title != 'wikibot' )
+		// Only pull article categorized with wikibot
+		if ($row->category_title != 'wikibot')
 		{
 			return;
 		}
 
-		try{
-			$result = $this->mediawiki->pages->getRevisions(array( $row->title ), array('content'), true);
+		try
+		{
+			$result = $this->_mediawiki->pages->getRevisions(array($row->title), array('content'), true);
 			$content = $result->query->pages->page->revisions->rev;
-		} catch(Exception $e) {
-			$content = 'Error retrieving content based on title.';
+		}
+		catch (Exception $e)
+		{
+			$content = JText::_('PLG_CONTENT_MEDIAWIKIARTICLE_ERROR_LOAD');
 		}
 
 		$row->text = $content;
 	}
-
 }

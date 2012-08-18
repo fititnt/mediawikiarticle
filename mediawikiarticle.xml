@@ -25,19 +25,19 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="mediawiki_username"
+				<field name="username"
 					   type="textfield"
 					   default=""
 					   label="PLG_CONTENT_MEDIAWIKIARTICLE_USERNAME_LABEL"
 					   description="PLG_CONTENT_MEDIAWIKIARTICLE_USERNAME_DESC"
 					   />
-				<field name="mediawiki_password"
+				<field name="password"
 					   type="password"
 					   default=""
 					   label="PLG_CONTENT_MEDIAWIKIARTICLE_PASSWORD_LABEL"
 					   description="PLG_CONTENT_MEDIAWIKIARTICLE_PASSWORD_DESC"
 					   />
-				<field name="mediawiki_siteurl"
+				<field name="siteurl"
 					   type="textfield"
 					   default="http://docs.joomla.org"
 					   requered="true"
