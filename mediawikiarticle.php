@@ -64,8 +64,8 @@ class plgContentMediawikiarticle extends JPlugin {
 			return;
 		}
 
-		// Only pull article categorized with wikibot
-		if ($row->category_title != 'wikibot')
+		// Pull article categorized on parameters. If root, allow all.
+		if ($this->params->get('catid', 0) !== 0 && $row->catid !== $this->params->get('catid', 0))
 		{
 			return;
 		}
@@ -77,6 +77,7 @@ class plgContentMediawikiarticle extends JPlugin {
 		}
 		catch (Exception $e)
 		{
+			// Maybe also log error with JLog for administrator view later?
 			$content = JText::_('PLG_CONTENT_MEDIAWIKIARTICLE_ERROR_LOAD');
 		}
 

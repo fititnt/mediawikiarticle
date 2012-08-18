@@ -25,6 +25,17 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
+				<field name="catid"
+					   type="category"
+					   default=""
+					   show_root="true"
+					   extension="com_content"
+					   label="PLG_CONTENT_MEDIAWIKIARTICLE_CATETORY_LABEL"
+					   description="PLG_CONTENT_MEDIAWIKIARTICLE_CATETORY_DESC"
+					   />
+
+				<field name="spacer1" type="spacer" hr="true"/>
+					   
 				<field name="username"
 					   type="textfield"
 					   default=""
